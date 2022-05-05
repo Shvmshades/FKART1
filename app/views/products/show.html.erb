@@ -1,0 +1,24 @@
+
+<%# if !@product.nil? %>
+<%#debugger%>
+<%# @product.each do |f|%>
+<%= link_to 'Back', products_path %>
+
+<h1><%= @product.name.capitalize %></h1>
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><%= @product.name%></h5>
+    <p class="card-text"><%= @product.description%></p>
+    <p class="card-text"><%= @product.price%></p>
+  </div>
+</div>
+<%= button_to "Add to cart", product_carts_path(@product), method: :POST %>
+
+
+
+
+ 
+
+ 
