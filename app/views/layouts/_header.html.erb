@@ -2,53 +2,63 @@
   &nbsp&nbsp&nbsp&nbsp
   <div class="container-fluid">
     <a class="navbar-brand">
-    
-      <%= link_to root_path do %>
+    <%= link_to root_path do %>
       <img src="https://1000logos.net/wp-content/uploads/2021/02/Flipkart-logo.png" style="width: 70px;height: 38px;" >
       <%end%>
-      
     </a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
         </li>&nbsp&nbsp&nbsp&nbsp
-       
-        
-            
-           <%if !Current.user.nil?%> 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            More
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          	<li><%#= link_to 'Edit password', "#",class: "dropdown-item" %></li>
-          	<!-- <li><a class="dropdown-item" href="#">Edit password</a></li> -->
-            <li><a class="dropdown-item" href="#">cart</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><%= button_to 'Logout', logout_path, method: :delete, class: "dropdown-item" %></li>
-          </ul>
-        </li>
 
-        <li class="nav-item">
-          <a class="nav-link " href="#" tabindex="-1" ><%= Current.user.email %></a>
-        </li>
-        
-        <%else%>   
-        <%= link_to 'Login', sign_in_path %>
-        <%end%>
-
-         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<li class="nav-item">          
-        <%= button_to 'Become a seller', set_seller_path, method: :post, class: "btn btn-sm btn-primary" %></li>&nbsp&nbsp&nbsp
         <%if !Current.user.nil?%> 
-        <%= button_to 'Cart', product_carts_path(Current.user.id), method: :get, class: "btn btn-sm btn-primary" %></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              More
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            	<li><%#= link_to 'Edit password', "#",class: "dropdown-item" %></li>
+            	<!-- <li><a class="dropdown-item" href="#">Edit password</a></li> -->
+              <li><a class="dropdown-item" href="#">cart</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= button_to 'Logout', logout_path, method: :delete, class: "dropdown-item" %></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="#" tabindex="-1" ><%= Current.user.email %></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="<%= carts_path %>" tabindex="-1" >Cart</a>
+          </li>
+        <%else%>   
+          <%= link_to 'Login', sign_in_path %>
         <%end%>
+
+         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <li class="nav-item">
+      <%if !Current.user.nil?%>
+      <%#debugger%>
+      <%user = Current.user%>
+      <%role = user.roles.collect(&:name)%>
+      <% unless role.include?("Seller")%>         
+      <%= button_to 'Become a seller', set_seller_path, method: :post, class: "btn btn-sm btn-primary" %></li>&nbsp&nbsp&nbsp
+      <%end%>
+      <% if role.include?("Seller")%>         
+      <%= link_to 'my_products', seller_product_path%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <li><%= button_to 'Add Products', categories_path, method: :get, class: "btn btn-sm btn-primary"%></li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <%end%>
+    <%= button_to 'Cart', "product_carts_path(Current.user.id)", method: :get, class: "btn btn-sm btn-primary"%>
+    <%end%>
 
        
       </ul>

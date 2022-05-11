@@ -1,6 +1,17 @@
 class SellersController < ApplicationController
   before_action :require_user_logged_in!
 
+  def seller_product
+    @user = User.find(Current.user.id)
+    @products = @user.products
+  end
+
+
+  def remove_seller_product
+  end
+
+
+
   def set_seller
     @user = User.find(Current.user.id)
     #debugger
@@ -12,7 +23,7 @@ class SellersController < ApplicationController
     end
   end
 
-  def new
-    @product = Product.new()
-  end
+  # def new
+  #   @product = Product.new()
+  # end
 end

@@ -1,0 +1,6 @@
+ <%= form_with url: categories_path do |f| %>
+ <%= f.label 'name:'%><br>
+    <p><%= f.text_field :name, id: 'name', placeholder:"new category" %>
+    </p>
+ <%= f.submit 'Add' %>
+ <%end%>

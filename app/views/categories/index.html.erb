@@ -1,0 +1,7 @@
+<h5>Select category</h5>
+<h6><% @categories.each do |f|%>
+	<%= button_to "#{f.name}",new_category_product_path(f.id), method: :get %><br>
+	<%#debugger%>
+	<%end%>
+</h6>
+<%= button_to 'Add Category',new_category_path, method: :get%>

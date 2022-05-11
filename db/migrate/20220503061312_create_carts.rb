@@ -1,8 +1,8 @@
 class CreateCarts < ActiveRecord::Migration[7.0]
   def up
     create_table :carts do |t|
-      t.references :user, foreign_key: true
-      t.references :product, foreign_key: true
+      t.references :user
+      t.references :product
 
       t.timestamps
     end

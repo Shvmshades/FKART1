@@ -1,0 +1,9 @@
+
+<%@products.each do |f|%>
+<div class="card-body">
+  <h5 class="card-title"><%= f.name %></h5>
+  <p class="card-text"><%= f.price %></p>
+  <%#debugger%>
+  <a href="View_product"><%= link_to "viewproduct",category_product_path(f.category_id,f.id)%></a>
+</div>
+<%end%>

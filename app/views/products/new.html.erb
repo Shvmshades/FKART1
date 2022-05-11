@@ -1,1 +1,19 @@
-this is add product page
+<center>
+  <h2> Add product </h2>
+  <%= form_with url: category_products_path(@category.id,Current.user.id) do |f| %>
+  <p>
+    <%= f.label 'name:'%><br>
+    <%= f.text_field :name, id: 'name' %>
+  </p>
+    
+  <p>
+    <%= f.label 'description:'%><br>
+    <%= f.text_field :description, id: 'description' %>
+  </p>
+    
+  <p>
+    <%= f.label 'price:'%><br>
+    <%= f.text_field :price, id: 'price' %>
+  </p>
+  <%= f.submit 'Create Product' %>
+  <%end%></center>

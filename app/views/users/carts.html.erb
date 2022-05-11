@@ -1,0 +1,32 @@
+<% @cartproducts.each do |f| %>
+<div>
+  <div>ProductName: <input name="ProductName" id=pname type="text" value="<%= f.name%>" style="border: 0px;"></div>
+<div>Price: <span><input name="price" id="price" type="text" value=<%= f.price%> /></span></div>
+<br>
+<div>
+  Qty:
+<input name="qty" id="qty" type="text" />  
+</div>
+
+<br />
+
+<div>
+  Total:
+<input name="total" id="total" type="text" />
+<%= button_to 'remove',remove_product_path(product_id: f.id, cart_id: @cart.id)%>  
+</div>
+
+<br><br>
+
+<script>
+  $(document).ready(function(){
+    var qty=$("#qty");
+    qty.keyup(function(){
+        var total=isNaN(parseInt(qty.val()* $("#price").val())) ? 0 :(qty.val()* $("#price").val())
+        $("#total").val(total);
+    });
+});
+</script>
+</div>
+<%end%>
+<center><%= link_to 'Ready to Buy',"#" %></center>

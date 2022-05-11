@@ -10,10 +10,18 @@ Rails.application.routes.draw do
   post 'sign_in', to: 'sessions#create', as: 'log_in'
   delete 'logout', to: 'sessions#destroy'
   post 'set_seller', to: 'sellers#set_seller'
+  get 'seller_product', to: 'sellers#seller_product'
+  get 'cart_product', to: 'carts#cart_product'
+  get 'carts', to: 'users#carts'
+  post 'remove_product', to: 'users#remove_cart_product'
 
-  resources :categories
-  resources :products do 
-    resources :carts
+  resources :categories do
+    resources :products
   end
- 
+
+  resources :carts do 
+    resources :products
+  end
+
+  
 end

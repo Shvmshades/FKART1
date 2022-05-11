@@ -1,8 +1,4 @@
-
-<%# if !@product.nil? %>
-<%#debugger%>
-<%# @product.each do |f|%>
-<%= link_to 'Back', products_path %>
+<%= link_to 'Back', root_path %>
 
 <h1><%= @product.name.capitalize %></h1>
 
@@ -14,11 +10,11 @@
     <p class="card-text"><%= @product.price%></p>
   </div>
 </div>
-<%= button_to "Add to cart", product_carts_path(@product), method: :POST %>
-
-
-
-
- 
-
- 
+<% if Current.user.nil?%>
+ <%= link_to "Add to cart", sign_in_path, class: "btn btn-primary"%>
+<% else %>
+<% if Current.user.id == @product.user_id%>
+<%else%>
+  <%= button_to "Add to cart", carts_path(product_id: @product.id), method: :POST %>
+<% end %>
+<% end %>
