@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   get 'cart_product', to: 'carts#cart_product'
   get 'carts', to: 'users#carts'
   post 'remove_product', to: 'users#remove_cart_product'
+  get 'search',to:'products#search'
+  get 'product_by_category', to: 'categories#product_by_category'
+
+  resources :passwords, only: [:edit,:update]
 
   resources :categories do
     resources :products
@@ -22,6 +26,4 @@ Rails.application.routes.draw do
   resources :carts do 
     resources :products
   end
-
-  
 end

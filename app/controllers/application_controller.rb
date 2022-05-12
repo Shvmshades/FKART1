@@ -9,21 +9,4 @@ class ApplicationController < ActionController::Base
       # allows only logged in user
       redirect_to sign_in_path, alert: 'You must be signed in' if Current.user.nil?
     end
-
-    # def current_shopping_cart
-    #   @user = Current.user
-    #   role = user.roles.collect(&:name)
-    #   if role.include?("Buyer")
-    #     # @cart = @user.cart
-    #     if session[:cart]
-    #       @cart = Cart.find(session[:cart])
-    #     else
-    #       @cart = Cart.create()
-    #       session[:cart] = @cart.id
-    #     end
-    #   end
-    # end
-
-    
-
 end

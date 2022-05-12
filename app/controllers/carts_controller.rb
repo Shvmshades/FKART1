@@ -7,7 +7,8 @@ class CartsController < ApplicationController
 
   def create
     @user = User.find(Current.user.id)#debugger
-    if Cart.find_by(params[:user_id])
+    if Cart.find_by(user_id: @user.id)
+      debugger
       cart_product
     else
       @cart = @user.build_cart(cart_params)
@@ -25,7 +26,8 @@ class CartsController < ApplicationController
 
   
   def cart_product
-    @cart = Cart.find_by(params[:user_id])
+    @user = User.find(Current.user.id)
+    @cart = Cart.find_by(user_id: @user.id)
    #debugger
     cart_prod = CartProduct.new(cart_id: @cart.id,product_id: params[:product_id])
     if cart_prod.save

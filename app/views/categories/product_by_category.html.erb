@@ -1,0 +1,6 @@
+
+<%if @products.blank?%>
+<h1>Sorry searching product is not available</h1>
+<%else%>
+<%= render partial: "shared/product", locals: {product: @products}  %>
+<%end%>

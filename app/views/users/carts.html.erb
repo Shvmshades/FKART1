@@ -1,4 +1,5 @@
 <% @cartproducts.each do |f| %>
+<%= image_tag f.image %>
 <div>
   <div>ProductName: <input name="ProductName" id=pname type="text" value="<%= f.name%>" style="border: 0px;"></div>
 <div>Price: <span><input name="price" id="price" type="text" value=<%= f.price%> /></span></div>

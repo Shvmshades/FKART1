@@ -8,10 +8,10 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
-  # def show
-  #   @category = Category.find(params[:id])
-  #   @products = @category.products.all
-  # end
+  def product_by_category
+    @cat_id = params[:id].to_i
+    @products = Product.all.where(category_id:@cat_id)
+  end
 
   def create
     @category = Category.new(name: params[:name])

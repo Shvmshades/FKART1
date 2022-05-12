@@ -1,15 +1,20 @@
 
-<div class="card" style="width: 18rem;">
- <% product.each do |f|%>
-  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-  <div class="card-body">
-    <h5 class="card-title"><%= f.name %></h5>
-    <p class="card-text"><%= f.price %></p>
-    <%#debugger%>
-    <a href="View_product"><%= link_to "viewproduct",category_product_path(f.category_id,f.id)%></a>
-    <!-- <a href="#" class="btn btn-primary">Add To cart</a> -->
-  </div>
-  </div>
-   <%end%>
+
+   
+   <div class="">
+     <div class="row m-0">
+      <% product.each do |f|%>
+       <div class="card col-lg-3">
+          <%= image_tag f.image %>
+          <div class="card-body">
+            <h5 class="card-title"><%= f.name %></h5>
+            <p class="card-text">price:<%= f.price %>/-</p>
+            <%#debugger%>
+            <a href="View_product"><%= link_to "viewproduct",category_product_path(f.category_id,f.id)%></a>
+          </div>
+          </div>
+          <%end%>
+     </div>
+   </div>
 
 

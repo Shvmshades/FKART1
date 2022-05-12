@@ -1,3 +1,21 @@
+<style type="text/css">
+  .search-form input{
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+  }
+  .search-form form{
+    display: flex;
+  }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   &nbsp&nbsp&nbsp&nbsp
   <div class="container-fluid">
@@ -10,15 +28,20 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <form class="d-flex">
+        <li class="nav-item search-form">
+          <!-- <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </li>&nbsp&nbsp&nbsp&nbsp
+          </form> -->
+          <%=form_tag search_path, :method => 'get' do %>
+          <%= text_field_tag :search, params[:search] %>
+          <%= button_to "Search", :name => nil %>
+          <% end %>
+
+        </li>&nbsp;&nbsp;&nbsp;&nbsp;
 
         <%if !Current.user.nil?%> 
           <li class="nav-item dropdown">
@@ -27,8 +50,9 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             	<li><%#= link_to 'Edit password', "#",class: "dropdown-item" %></li>
-            	<!-- <li><a class="dropdown-item" href="#">Edit password</a></li> -->
-              <li><a class="dropdown-item" href="#">cart</a></li>
+              <% @user = User.find(Current.user.id)%>
+            	<li><a class="dropdown-item" href="<%= edit_password_path(@user.id) %>" >Edit password</a></li>
+              <li><a class="dropdown-item" href="<%= carts_path%>">cart</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><%= button_to 'Logout', logout_path, method: :delete, class: "dropdown-item" %></li>
             </ul>
@@ -57,12 +81,18 @@
       <%= link_to 'my_products', seller_product_path%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
       <li><%= button_to 'Add Products', categories_path, method: :get, class: "btn btn-sm btn-primary"%></li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
       <%end%>
-    <%= button_to 'Cart', "product_carts_path(Current.user.id)", method: :get, class: "btn btn-sm btn-primary"%>
     <%end%>
 
-       
+    <%#=form_tag search_path, :method => 'get' do %>
+    <%#= text_field_tag :search, params[:search] %>
+    <%#= submit_tag "Search", :name => nil %>
+    <%# end %>
+
+
       </ul>
-      <%#= link_to "Admin_user", new_admin_user_path ,class: "btn btn-sm btn-primary"%>
+      <%#= link_to "Admin_user", "new_admin_user_path" ,class: "btn btn-sm btn-primary"%>
     </div>
   </div>
 </nav>
+
+
