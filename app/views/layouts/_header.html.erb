@@ -54,7 +54,7 @@
             	<li><a class="dropdown-item" href="<%= edit_password_path(@user.id) %>" >Edit password</a></li>
               <li><a class="dropdown-item" href="<%= carts_path%>">cart</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><%= button_to 'Logout', logout_path, method: :delete, class: "dropdown-item" %></li>
+              <li><%= button_to 'Logout', session_path(@user.id), method: :delete, class: "dropdown-item" %></li>
             </ul>
           </li>
 
@@ -65,7 +65,7 @@
             <a class="nav-link " href="<%= carts_path %>" tabindex="-1" >Cart</a>
           </li>
         <%else%>   
-          <%= link_to 'Login', sign_in_path %>
+          <%= link_to 'Login', new_session_path %>
         <%end%>
 
          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -83,11 +83,7 @@
       <%end%>
     <%end%>
 
-    <%#=form_tag search_path, :method => 'get' do %>
-    <%#= text_field_tag :search, params[:search] %>
-    <%#= submit_tag "Search", :name => nil %>
-    <%# end %>
-
+   
 
       </ul>
       <%#= link_to "Admin_user", "new_admin_user_path" ,class: "btn btn-sm btn-primary"%>

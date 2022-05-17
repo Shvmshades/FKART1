@@ -6,12 +6,6 @@ class SellersController < ApplicationController
     @products = @user.products
   end
 
-
-  def remove_seller_product
-  end
-
-
-
   def set_seller
     @user = User.find(Current.user.id)
     #debugger
@@ -22,8 +16,4 @@ class SellersController < ApplicationController
       redirect_to root_path, alert:'something is wrong'
     end
   end
-
-  # def new
-  #   @product = Product.new()
-  # end
 end

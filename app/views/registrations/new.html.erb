@@ -1,6 +1,6 @@
 <center>
 <h1>Sign Up</h1>
-  <%= form_with model: @user, url: sign_up_path do |f| %>
+  <%= form_with model: @user, url: registrations_path do |f| %>
     <p>
     <%= f.label 'email' %><br>
     <%= f.text_field :email %>

@@ -1,7 +1,7 @@
 <%= link_to 'Back', root_path %>
 <center>
 <h1>Sign In</h1>
-  <%= form_with url: sign_in_path do |f| %>
+  <%= form_with url: sessions_path do |f| %>
     <p>
     <%= f.label 'email:'%><br>
     <%= f.text_field :email, id: 'email' %>
@@ -13,5 +13,5 @@
     <p>
     <%= f.submit 'Log In' %>
     </p>
-    <%= link_to 'new to fkart? Sign Up', sign_up_path %>
+    <%= link_to 'new to fkart? Sign Up', new_registration_path %>
   <% end %></center>

@@ -1,0 +1,4 @@
+<center><h4>your link has been expired please resent the link </h4>
+<% #debugger%>
+<%= link_to 'resent_link', update_token_registration_path(params[:id]), data: { "turbo-method": :patch } %>
+</center>

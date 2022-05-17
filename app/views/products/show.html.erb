@@ -12,7 +12,7 @@
   </div>
 </div>
 <% if Current.user.nil?%>
- <%= link_to "Add to cart", sign_in_path, class: "btn btn-primary"%>
+ <%= link_to "Add to cart", new_session_path, class: "btn btn-primary"%>
 <% else %>
 <% if Current.user.id == @product.user_id%>
 <%else%>

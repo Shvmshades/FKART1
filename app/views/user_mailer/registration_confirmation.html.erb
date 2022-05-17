@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to fkart, <%= @user.name %></h1>
+      Thanks for registering! To confirm your registration click the URL below.
+      <%= confirm_email_registration_url(@user.confirm_token) %>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

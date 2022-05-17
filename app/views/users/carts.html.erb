@@ -2,11 +2,11 @@
 <%= image_tag f.image %>
 <div>
   <div>ProductName: <input name="ProductName" id=pname type="text" value="<%= f.name%>" style="border: 0px;"></div>
-<div>Price: <span><input name="price" id="price" type="text" value=<%= f.price%> /></span></div>
+<div>Price: <span><input name="price" id=<%= f.id%> type="text" value=<%= f.price%> /></span></div>
 <br>
 <div>
   Qty:
-<input name="qty" id="qty" type="text" />  
+<input name="qty" id="qty" value="shiv" onchange="handlechangevalue(e)" type="text" />  
 </div>
 
 <br />
@@ -15,17 +15,29 @@
   Total:
 <input name="total" id="total" type="text" />
 <%= button_to 'remove',remove_product_path(product_id: f.id, cart_id: @cart.id)%>  
+<button id="<%= f.id%>" onclick="handleclick(<%= f.price%>)">Click</button>
 </div>
 
 <br><br>
 
 <script>
+  function handleclick(agr) {
+    // const clickButton = document.getElementById(qty).value;
+    
+    console.log(agr )
+    // body...
+  }
+
+  function handlechangevalue(e){
+      console.log(e.target.value)
+    }
+
   $(document).ready(function(){
     var qty=$("#qty");
-    qty.keyup(function(){
-        var total=isNaN(parseInt(qty.val()* $("#price").val())) ? 0 :(qty.val()* $("#price").val())
-        $("#total").val(total);
-    });
+    // qty.keyup(function(){
+    //     var total=isNaN(parseInt(qty.val()* $("#<%= f.id%>").val())) ? 0 :(qty.val()* $("#price").val())
+    //     $("#total").val(total);
+    // });
 });
 </script>
 </div>
