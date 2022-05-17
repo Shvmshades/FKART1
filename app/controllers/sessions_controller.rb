@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:email])
-    debugger
+    #debugger
     if @user.nil?
       redirect_to root_path, alert:"user email doesn't exist"
     else
