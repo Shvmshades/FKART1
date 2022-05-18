@@ -15,10 +15,14 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(name: params[:name])
-    if @category.save
-      redirect_to categories_path, notice:'category added successfully'
+    if @category.name.blank?
+      redirect_to new_category_path, alert:"category name can't be blank"
     else
-      redirect_to new_category_path, alert:'something is wrong'
+      if @category.save
+      redirect_to categories_path, notice:'category added successfully'
+      else
+        redirect_to new_category_path, alert:'something is wrong'
+      end
     end
   end
 

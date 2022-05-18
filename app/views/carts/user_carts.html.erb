@@ -1,0 +1,53 @@
+<% @cartproducts.each do |f| %>
+<%= image_tag f.image %>
+  
+  <div>
+    <div>ProductName: <input name="ProductName" id="name_<%= f.id %>" type="text" value="<%= f.name%>" style="border: 0px" readonly>
+  </div>
+  
+  <div class='price'>Price: <span><input name="price"  id='price_<%= f.id %>' type="text" value=<%= f.price.to_i %> readonly/></span></div>
+  <br>
+  
+  <div class='qty'> Qty: <input name="qty" class="pro-qty" type="text" id='qty_<%= f.id %>' value="1" />  
+  </div>
+  <br />
+
+  <div>
+  Total:
+  <input name="total" class="prod-total" id="total_<%= f.id %>" type="text" value=<%= f.price.to_i %> readonly/>
+  <%= button_to 'remove',remove_product_path(product_id: f.id, cart_id: @cart.id)%>  
+  </div>
+  <br>
+
+<script>
+  $( document ).ready( function() { 
+    sum = 0;
+    $("input[class *= 'prod-total']").each(function(){
+        sum += +$(this).val();
+    });
+    $(".total").val(sum);
+
+      $(".pro-qty").keyup(function(){
+    var product_id = this.id.split("_")[1]
+    var qty = $("#qty_"+product_id).val();
+    var price = $("#price_"+product_id).val();
+    var total=isNaN(parseInt(qty*price)) ? 0 :(qty* price)
+    $("#total_"+product_id).val(total);
+  
+  sum = 0;
+    $("input[class *= 'prod-total']").each(function(){
+        sum += +$(this).val();
+    });
+    $(".total").val(sum);
+
+  });});
+</script>
+</div>
+
+<%end%>
+<div class="total">Total_price:<input name='total-price' class="total" type="text" readonly></div>
+<% if @cartproducts.blank?%>
+<center><h1>there is no product in cart<h1></center>
+<%else%>
+<%= link_to 'Ready to Buy',"#" %>
+<%end%>

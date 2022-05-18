@@ -1,0 +1,6 @@
+<h5>User Name:<%=@user.name%></h5>
+<h5>User email:<%=@user.email%></h5>
+<h5>User Role:<%@user.roles.each do |f|%>
+	<%= f.name%>,
+		<%end%>
+    </h5>

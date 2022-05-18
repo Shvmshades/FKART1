@@ -5,10 +5,22 @@ class CartsController < ApplicationController
   #   @user = User.find(Current.user.id)
   # end
 
+  def user_carts
+    @user = User.find(Current.user.id)
+    @cart = @user.cart
+    #debugger
+    if @cart.nil?
+      redirect_to root_path, alert:"you don't have any product in cart"
+    else
+      @cartproducts = @cart.products
+    end
+  end
+
+
   def create
     @user = User.find(Current.user.id)#debugger
     if Cart.find_by(user_id: @user.id)
-      debugger
+      # debugger
       cart_product
     else
       @cart = @user.build_cart(cart_params)

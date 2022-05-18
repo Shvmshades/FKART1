@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post 'set_seller', to: 'sellers#set_seller'
   get 'seller_product', to: 'sellers#seller_product'
   get 'cart_product', to: 'carts#cart_product'
-  get 'carts', to: 'users#carts'
+  get 'carts', to: 'carts#user_carts'
   post 'remove_product', to: 'users#remove_cart_product'
   get 'search',to:'products#search'
   get 'product_by_category', to: 'categories#product_by_category'
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :registrations, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   resources :passwords, only: [:edit,:update]
+  resources :users, only: [:show]
 
   resources :categories do
     resources :products

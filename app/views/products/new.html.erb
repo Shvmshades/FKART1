@@ -1,6 +1,6 @@
 <center>
   <h2> Add product </h2>
-  <%= form_with url: category_products_path(@category.id,Current.user.id) do |f| %>
+  <%= form_with url: category_products_path(@category.id,user_id:Current.user.id) do |f| %>
   <p>
     <%= f.label 'name:'%><br>
     <%= f.text_field :name, id: 'name' %>
@@ -19,6 +19,11 @@
   <p>
     <%= f.label 'price:'%><br>
     <%= f.text_field :price, id: 'price' %>
+  </p>
+
+  <p>
+    <%= f.label 'quantity:'%><br>
+    <%= f.text_field :quantity, id: 'quantity' %>
   </p>
   <%= f.submit 'Create Product' %>
   <%end%></center>

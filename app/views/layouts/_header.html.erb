@@ -17,7 +17,7 @@
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  &nbsp&nbsp&nbsp&nbsp
+  &nbsp;&nbsp;&nbsp;&nbsp;
   <div class="container-fluid">
     <a class="navbar-brand">
     <%= link_to root_path do %>
@@ -58,9 +58,9 @@
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link " href="#" tabindex="-1" ><%= Current.user.email %></a>
-          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link " href="#" tabindex="-1" >Login_as: <%#= Current.user.email %></a>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link " href="<%= carts_path %>" tabindex="-1" >Cart</a>
           </li>
@@ -68,23 +68,28 @@
           <%= link_to 'Login', new_session_path %>
         <%end%>
 
-         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class="nav-item">
       <%if !Current.user.nil?%>
-      <%#debugger%>
       <%user = Current.user%>
       <%role = user.roles.collect(&:name)%>
-      <% unless role.include?("Seller")%>         
-      <%= button_to 'Become a seller', set_seller_path, method: :post, class: "btn btn-sm btn-primary" %></li>&nbsp&nbsp&nbsp
+       <% unless role.include?("Seller")%>         
+      <%= button_to 'Become a seller', set_seller_path, method: :post, class: "btn btn-sm btn-primary" %></li>&nbsp;&nbsp;&nbsp;
       <%end%>
       <% if role.include?("Seller")%>         
-      <%= link_to 'my_products', seller_product_path%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-      <li><%= button_to 'Add Products', categories_path, method: :get, class: "btn btn-sm btn-primary"%></li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <%= link_to 'my_products', seller_product_path%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li><%= button_to 'Add Products', categories_path, method: :get, class: "btn btn-sm btn-primary"%></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%end%>
     <%end%>
-
-   
-
+      
+      <%if !Current.user.nil?%>
+      
+      <li class="nav-item" style="margin-left: 487px;">
+          <a class="nav-link " href="<%= user_path(id: Current.user.id)%>" tabindex="-1" >Login_as: <%= Current.user.email %></a>
+      </li>
+      <%end%>
+      
+      
       </ul>
       <%#= link_to "Admin_user", "new_admin_user_path" ,class: "btn btn-sm btn-primary"%>
     </div>

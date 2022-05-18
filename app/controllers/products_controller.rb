@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
 
 
   def create
-    #debugger
+    debugger
     @user = User.find(Current.user.id)
     if @product = @user.products.create(product_params)
       redirect_to seller_product_path, notice:'product added successfully'
@@ -46,7 +46,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.permit(:name,:description,:price,:category_id,:image,:search)
+    params.permit(:name,:description,:price,:category_id,:image,:search,:quantity)
   end
 
 end
