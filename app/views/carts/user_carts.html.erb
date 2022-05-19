@@ -1,53 +1,64 @@
 <% @cartproducts.each do |f| %>
 <%= image_tag f.image %>
-  
-  <div>
+  <%if f.quantity.blank?%>
+    <p>Out of stock</p>
+  <%else%>
+   
+  <div> 
+    <div class="quantity"> <input name="quantity"  id="quantity_<%= f.id %>"  value="<%= f.quantity%>" style="border: 0px" readonly>
+    </div>
+    <%end%> 
+
     <div>ProductName: <input name="ProductName" id="name_<%= f.id %>" type="text" value="<%= f.name%>" style="border: 0px" readonly>
-  </div>
+    </div>
   
-  <div class='price'>Price: <span><input name="price"  id='price_<%= f.id %>' type="text" value=<%= f.price.to_i %> readonly/></span></div>
-  <br>
+    <div class='price'>Price: <span><input name="price"  id='price_<%= f.id %>' type="text" value=<%= f.price.to_i %> readonly/></span></div><br>
   
-  <div class='qty'> Qty: <input name="qty" class="pro-qty" type="text" id='qty_<%= f.id %>' value="1" />  
-  </div>
-  <br />
+    <div class='qty'> Qty: <input name="qty" class="pro-qty" type="text" id='qty_<%= f.id %>' value="1" />  
+    </div><br>
 
-  <div>
-  Total:
-  <input name="total" class="prod-total" id="total_<%= f.id %>" type="text" value=<%= f.price.to_i %> readonly/>
-  <%= button_to 'remove',remove_product_path(product_id: f.id, cart_id: @cart.id)%>  
-  </div>
-  <br>
+    <div>
+    Total:
+    <input name="total" class="prod-total" id="total_<%= f.id %>" type="text" value=<%= f.price.to_i %> readonly/>
+    <%= button_to 'remove',remove_product_path(product_id: f.id, cart_id: @cart.id)%>  
+    </div><br>
 
-<script>
-  $( document ).ready( function() { 
-    sum = 0;
-    $("input[class *= 'prod-total']").each(function(){
+    <script>
+      $( document ).ready( function() { 
+        sum = 0;
+        $("input[class *= 'prod-total']").each(function(){
         sum += +$(this).val();
-    });
-    $(".total").val(sum);
+        });
+        $(".total").val(sum);
 
-      $(".pro-qty").keyup(function(){
-    var product_id = this.id.split("_")[1]
-    var qty = $("#qty_"+product_id).val();
-    var price = $("#price_"+product_id).val();
-    var total=isNaN(parseInt(qty*price)) ? 0 :(qty* price)
-    $("#total_"+product_id).val(total);
+        $(".pro-qty").keyup(function(){
+
+          var product_id = this.id.split("_")[1]
+          var avail_qty = $("#quantity_"+product_id).val(); 
+          var qty = $("#qty_"+product_id).val();  
+          var price = $("#price_"+product_id).val();
+          var total=isNaN(parseInt(qty*price)) ? 0 :(qty* price)
+          $("#total_"+product_id).val(total);
+          if (avail_qty < qty){
+            alert("product can be buy upto "+avail_qty);
+            $("#qty_"+product_id).val(0);
+            $("#total_"+product_id).val(0);
+          }
   
-  sum = 0;
-    $("input[class *= 'prod-total']").each(function(){
-        sum += +$(this).val();
-    });
-    $(".total").val(sum);
-
-  });});
-</script>
-</div>
+        sum = 0;
+        $("input[class *= 'prod-total']").each(function(){
+          sum += +$(this).val();
+        });
+        
+        $(".total").val(sum);
+      });});
+    </script>
+  </div>
 
 <%end%>
 <div class="total">Total_price:<input name='total-price' class="total" type="text" readonly></div>
 <% if @cartproducts.blank?%>
 <center><h1>there is no product in cart<h1></center>
 <%else%>
-<%= link_to 'Ready to Buy',"#" %>
+<%= link_to 'PAYMENT',billing_index_path %>
 <%end%>

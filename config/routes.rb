@@ -15,14 +15,21 @@ Rails.application.routes.draw do
   get 'carts', to: 'carts#user_carts'
   post 'remove_product', to: 'users#remove_cart_product'
   get 'search',to:'products#search'
-  get 'product_by_category', to: 'categories#product_by_category'
+  # get 'product_by_category', to: 'categories#product_by_category'
+  get '/card/new' => 'billing#new_card', as: :add_payment_method
+  post "/card" => "billing#create_card", as: :create_payment_method
+  get '/success' => 'billing#success', as: :success
 
   resources :registrations, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   resources :passwords, only: [:edit,:update]
   resources :users, only: [:show]
+  resources :billing, only: [:index]
 
   resources :categories do
+    member do
+      get :product_by_category
+    end
     resources :products
   end
 

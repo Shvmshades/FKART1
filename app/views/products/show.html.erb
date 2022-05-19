@@ -3,18 +3,23 @@
 <h1><%= @product.name.capitalize %></h1>
 
 <div class="card" style="width: 18rem;">
-  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-  <%= image_tag @product.image%>
+  <%if @product.image.present?%>
+    <%= image_tag @product.image%>
+  <%else%>
+    <img class="card-img-top" src="..." alt="Card image cap"> 
+  <%end%>
+
   <div class="card-body">
     <h5 class="card-title"><%= @product.name%></h5>
     <p class="card-text"><%= @product.description%></p>
     <p class="card-text"><%= @product.price%></p>
   </div>
 </div>
+
 <% if Current.user.nil?%>
- <%= link_to "Add to cart", new_session_path, class: "btn btn-primary"%>
+  <%= link_to "Add to cart", new_session_path, class: "btn btn-primary"%>
 <% else %>
-<% if Current.user.id == @product.user_id%>
+  <% if Current.user.id == @product.user_id%>
 <%else%>
   <%= button_to "Add to cart", carts_path(product_id: @product.id), method: :POST %>
 <% end %>

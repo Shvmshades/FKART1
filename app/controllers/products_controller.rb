@@ -11,6 +11,9 @@ class ProductsController < ApplicationController
       #debugger
       @prod = params[:search]
       @products = Product.all.where("name LIKE ?", "%#{@prod}%")
+      if @products.blank?
+        redirect_to root_path, alert:'there is no product you want'
+      end
     end
   end
 
@@ -25,9 +28,9 @@ class ProductsController < ApplicationController
 
 
   def create
-    debugger
-    @user = User.find(Current.user.id)
-    if @product = @user.products.create(product_params)
+    #debugger
+    @category = Category.find(params[:category_id])
+    if @product = @category.products.create(product_params)
       redirect_to seller_product_path, notice:'product added successfully'
     else
       redirect_to new_category_product_path, alert:'something is wrong'
@@ -46,7 +49,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.permit(:name,:description,:price,:category_id,:image,:search,:quantity)
+    params.permit(:name,:description,:price,:user_id,:category_id,:image,:search,:quantity)
   end
 
 end
