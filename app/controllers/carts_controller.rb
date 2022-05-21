@@ -49,6 +49,15 @@ class CartsController < ApplicationController
     end
   end
 
+  def remove_cart_product
+    # debugger
+    @cart_product = CartProduct.find_by(cart_id: params[:cart_id], product_id: params[:product_id])
+    if @cart_product.destroy
+      redirect_to carts_path, notice:'product removed successfully'
+    end
+  end
+
+
 
   private
 

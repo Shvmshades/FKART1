@@ -1,6 +1,6 @@
 <%= javascript_include_tag 'https://checkout.stripe.com/checkout.js' %>
-
 <script>
+    
     var handler = StripeCheckout.configure({
         key: '<%= Rails.application.credentials.stripe[Rails.env.to_sym][:publishable_key] %>',
         //get a publishable key that we put in editor depending on environment: production or development
@@ -12,9 +12,9 @@
         panelLabel: "Add payment method",
         allowRememberMe: false,
         token: function (token) {
-
+            
             var form = document.getElementById('billing-create-payment-method');
-            debugger
+            
             //we will create element with this id in the next step
             var hiddenInput = document.createElement('input');
             hiddenInput.setAttribute('type', 'hidden');

@@ -1,7 +1,11 @@
-<% @cartproducts.each do |f| %>
-<%= image_tag f.image %>
+  <% @cartproducts.each do |f| %>
+  <%if f.image.blank?%>
+  <p>image not uploaded</p>
+  <%else%>
+  <%= image_tag f.image %>
+  <%end%>
   <%if f.quantity.blank?%>
-    <p>Out of stock</p>
+  <p>Out of stock</p>
   <%else%>
    
   <div> 

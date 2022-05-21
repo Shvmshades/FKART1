@@ -6,6 +6,11 @@ class RegistrationsController < ApplicationController
 
   def show
   end
+  
+  def show_user
+    @user = User.find(Current.user.id)
+  end
+
     
   def create
     @user = User.new(user_params)

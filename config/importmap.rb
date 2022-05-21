@@ -2,6 +2,8 @@
 
 pin "application", preload: true
 
+pin "@rails/ujs", to: "https://ga.jspm.io/npm:@rails/ujs@7.0.3/lib/assets/compiled/rails-ujs.js"
+
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true

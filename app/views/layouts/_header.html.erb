@@ -85,7 +85,7 @@
       <%if !Current.user.nil?%>
       
       <li class="nav-item" style="margin-left: 487px;">
-          <a class="nav-link " href="<%= user_path(id: Current.user.id)%>" tabindex="-1" >Login_as: <%= Current.user.email %></a>
+          <a class="nav-link " href="<%= show_user_registration_path(id: Current.user.id)%>" tabindex="-1" >Login_as: <%= Current.user.email %></a>
       </li>
       <%end%>
       
