@@ -54,7 +54,9 @@ gem "bootsnap", require: false
   gem 'stripe-rails'
   gem 'dotenv-rails'
   gem 'omniauth-google-oauth2'
-
+  gem 'searchkick'
+  gem 'elasticsearch-model'
+  gem 'elasticsearch-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

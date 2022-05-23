@@ -40,12 +40,16 @@ class CartsController < ApplicationController
   def cart_product
     @user = User.find(Current.user.id)
     @cart = Cart.find_by(user_id: @user.id)
-   #debugger
-    cart_prod = CartProduct.new(cart_id: @cart.id,product_id: params[:product_id])
-    if cart_prod.save
-      redirect_to carts_path, notice:'added to the cart'
+   cart_prod = CartProduct.find_by(cart_id: @cart.id,product_id: params[:product_id])
+   if cart_prod.nil?
+      cart_prod = CartProduct.new(cart_id: @cart.id,product_id: params[:product_id])
+      if cart_prod.save
+        redirect_to carts_path, notice:'added to the cart'
+      else
+        redirect_to carts_path, alert:'something is wrong'
+      end
     else
-      redirect_to carts_path, alert:'something is wrong'
+      redirect_to carts_path, notice:'already added to the cart'
     end
   end
 

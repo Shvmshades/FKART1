@@ -8,10 +8,9 @@ class ProductsController < ApplicationController
     if params[:search].blank?
       redirect_to root_path, alert:'there is no product you want'
     else
-      #debugger
       @prod = params[:search]
-      @products = Product.all.where("name LIKE ?", "%#{@prod}%")
-      if @products.blank?
+      @products = Product.search("%#{@prod}%", page: params[:page], per_page: 20)
+      if !@products.any?
         redirect_to root_path, alert:'there is no product you want'
       end
     end
@@ -31,6 +30,7 @@ class ProductsController < ApplicationController
     #debugger
     @category = Category.find(params[:category_id])
     if @product = @category.products.create(product_params)
+      #@product.reindex
       redirect_to seller_product_path, notice:'product added successfully'
     else
       redirect_to new_category_product_path, alert:'something is wrong'
@@ -38,6 +38,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    #debugger
     @product = Product.find(params[:id])
     if @product.destroy
       redirect_to seller_product_path, notice:'product has been deleted'

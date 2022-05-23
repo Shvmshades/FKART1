@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:email])
-    #debugger
+    debugger
     if @user.nil?
       redirect_to root_path, alert:"user email doesn't exist"
     else
@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
           session[:user_id] = @user.id
           redirect_to root_path, notice: 'Logged in successfully'
         else
-          flash.now[:alert] = 'Invalid email or password'
-          render :new
+          redirect_to new_session_path, alert:'Invalid email or password' 
         end
       else
         redirect_to root_path, alert:'mail is not verified'

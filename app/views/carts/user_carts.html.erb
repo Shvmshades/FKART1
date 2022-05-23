@@ -43,7 +43,9 @@
           var price = $("#price_"+product_id).val();
           var total=isNaN(parseInt(qty*price)) ? 0 :(qty* price)
           $("#total_"+product_id).val(total);
-          if (avail_qty < qty){
+          avail_qty = parseInt(avail_qty)
+          qty = parseInt(qty)
+          if (avail_qty <= qty){
             alert("product can be buy upto "+avail_qty);
             $("#qty_"+product_id).val(0);
             $("#total_"+product_id).val(0);
