@@ -38,7 +38,7 @@ class RegistrationsController < ApplicationController
   def confirm_email
     @user = User.find_by_confirm_token(params[:id])
     if @user
-      debugger
+      #debugger
       if @user.updated_at + 15.minutes >= Time.zone.now
         @user.email_activate
         flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
