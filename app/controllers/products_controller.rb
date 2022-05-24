@@ -9,8 +9,8 @@ class ProductsController < ApplicationController
       redirect_to root_path, alert:'there is no product you want'
     else
       @prod = params[:search]
-      @products = Product.search("%#{@prod}%", page: params[:page], per_page: 20)
-      if !@products.any?
+      @products = Product.search("#{@prod}", page: params[:page], per_page: 20)
+      if @products.blank?
         redirect_to root_path, alert:'there is no product you want'
       end
     end
@@ -34,6 +34,21 @@ class ProductsController < ApplicationController
       redirect_to seller_product_path, notice:'product added successfully'
     else
       redirect_to new_category_product_path, alert:'something is wrong'
+    end
+  end
+
+  def edit
+    #debugger
+    @category = Category.find(params[:category_id])
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to seller_product_path, notice:'product has been updated'
+    else
+      redirect_to seller_product_path, alert:"something is wrong"
     end
   end
 

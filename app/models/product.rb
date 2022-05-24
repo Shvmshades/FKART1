@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  searchkick search_synonyms: "synonyms.txt"
+  searchkick 
 
   has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories

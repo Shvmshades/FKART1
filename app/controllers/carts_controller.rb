@@ -1,10 +1,7 @@
 class CartsController < ApplicationController
   before_action :require_user_logged_in!
 
-  # def index
-  #   @user = User.find(Current.user.id)
-  # end
-
+  
   def user_carts
     @user = User.find(Current.user.id)
     @cart = @user.cart

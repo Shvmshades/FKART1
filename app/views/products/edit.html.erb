@@ -1,0 +1,36 @@
+<center>
+  <h2> Update product </h2>
+  <%= form_with url: category_product_path(@category.id,user_id:Current.user.id),method: :patch do |f| %>
+  <p>
+    <%= f.label 'name:'%><br>
+    <input name="name"  id="name"  value="<%= @product.name%>" >
+    <%#= f.text_field :name, id: 'name' %>
+  </p>
+
+  <p>
+    <%unless @product.image.blank?%>
+    <%= image_tag @product.image%><br>
+    <%end%>
+    <%= f.file_field :image, id: 'image' %>
+  </p>
+
+    
+  <p>
+    <%= f.label 'description:'%><br>
+    <input name="description"  id="description"  value="<%= @product.description%>" >
+    <%#= f.text_field :description, id: 'description' %>
+  </p>
+    
+  <p>
+    <%= f.label 'price:'%><br>
+    <input name="price"  id="price"  value="<%= @product.price%>" >
+    <%#= f.text_field :price, id: 'price' %>
+  </p>
+
+  <p>
+    <%= f.label 'quantity:'%><br>
+    <input name="quantity"  id="quantity"  value="<%= @product.quantity%>" >
+    <%#= f.text_field :quantity, id: 'quantity' %>
+  </p>
+  <%= f.submit 'Update Product' %>
+  <%end%></center>
