@@ -20,7 +20,7 @@ class RegistrationsController < ApplicationController
       #session[:user_id] = @user.id
       redirect_to root_path, notice:'please confirm your email to continue'
     else
-      redirect_to root_path, alert:'user is not saved.'
+      redirect_to root_path, alert:'Already a user.'
     end
   end
 
@@ -41,8 +41,7 @@ class RegistrationsController < ApplicationController
       #debugger
       if @user.updated_at + 15.minutes >= Time.zone.now
         @user.email_activate
-        flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
-        Please sign in to continue."
+        flash[:success] = "Welcome to the Sample App! Your email has been confirmed."
         redirect_to new_session_path, notice:'welcome to fkart'
       else
         redirect_to registration_path(id: @user.id),notice:'your link has been expired'
