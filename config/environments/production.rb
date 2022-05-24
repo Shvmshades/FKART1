@@ -69,8 +69,8 @@ config.action_mailer.raise_delivery_errors = true
 # config.action_mailer.preview_path = "#{Rails.root}/tmp/mailers/previews"
 
 config.action_mailer.delivery_method = :smtp
-host = 'https://fkart1.herokuapp.com/' #replace with your own url
-config.action_mailer.default_url_options = { host: 'https://fkart1.herokuapp.com/' }
+ #replace with your own url
+config.action_mailer.default_url_options = { host: 'fkart1.herokuapp.com' }
   # SMTP settings for gmail
 config.action_mailer.smtp_settings = {
   :address              => "smtp.gmail.com",
