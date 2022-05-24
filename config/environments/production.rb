@@ -64,24 +64,6 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.perform_deliveries = true
-config.action_mailer.raise_delivery_errors = true
-# config.action_mailer.preview_path = "#{Rails.root}/tmp/mailers/previews"
-
-# config.action_mailer.delivery_method = :smtp
-#  #replace with your own url
-# config.action_mailer.default_url_options = { host: 'fkart1.herokuapp.com' }
-#   # SMTP settings for gmail
-# config.action_mailer.smtp_settings = {
-#   :address              => "smtp.gmail.com",
-#   :port                 => 587,
-#   :user_name            => ENV["SMTP_USER_NAME"],
-#   :password             => ENV["SMTP_PASSWORD"],
-#   :authentication       => "plain",
-#   :enable_starttls_auto => true
-# }
-
-
   
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -113,7 +95,20 @@ config.action_mailer.raise_delivery_errors = true
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], {}
+config.action_mailer.perform_deliveries = true
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.default_url_options = { host: 'fkart1.herokuapp.com' }
+
+# SMTP settings for gmail
+config.action_mailer.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :user_name            => ENV["SMTP_USER_NAME"],
+  :password             => ENV["SMTP_PASSWORD"],
+  :authentication       => "plain",
+  :enable_starttls_auto => true
+}
 
 
 end
