@@ -28,13 +28,16 @@ class ProductsController < ApplicationController
 
 
   def create
-    #debugger
+    debugger
     @category = Category.find(params[:category_id])
-    if @product = @category.products.create(product_params)
+    @product = @category.products.new(product_params)
+    @category.products << @product
+    if @product.save
       #@product.reindex
       redirect_to seller_product_path, notice:'product added successfully'
     else
-      redirect_to new_category_product_path, alert:'something is wrong'
+      
+      redirect_to new_category_product_path, alert:"field can't be empty"
     end
   end
 
@@ -54,7 +57,6 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    #debugger
     @product = Product.find(params[:id])
     if @product.destroy
       redirect_to seller_product_path, notice:'product has been deleted'

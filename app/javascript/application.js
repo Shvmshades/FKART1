@@ -2,3 +2,4 @@
 //import "@hotwired/stimulus-importmap-autoloader"
 import "@hotwired/turbo-rails"
 import Rails from '@rails/ujs';
+// require("@rails/activestorage").start()

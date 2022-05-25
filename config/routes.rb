@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   
   post 'set_seller', to: 'sellers#set_seller'
   get 'seller_product', to: 'sellers#seller_product'
+
   get 'cart_product', to: 'carts#cart_product'
   get 'carts', to: 'carts#user_carts'
   post 'remove_product', to: 'carts#remove_cart_product'
+  
   get 'search',to:'products#search'
   get '/card/new' => 'billing#new_card', as: :add_payment_method
   post "/card" => "billing#create_card", as: :create_payment_method

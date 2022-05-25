@@ -62,9 +62,9 @@
   </div>
 
 <%end%>
-<div class="total">Total_price:<input name='total-price' class="total" type="text" readonly></div>
 <% if @cartproducts.blank?%>
 <center><h1>there is no product in cart<h1></center>
 <%else%>
+<div class="total">Total_price:<input name='total-price' class="total" type="text" readonly></div>
 <%= link_to 'PAYMENT',billing_index_path %>
 <%end%>

@@ -3,7 +3,7 @@
       <% product.each do |f|%>
        <div class="card col-lg-3">
         <%if f.image.present?%>
-          <%= image_tag f.image %>
+          <%= cl_image_tag f.image.key %>
         <%else%>
         missing image
         <img class="card-img-top" src="..." alt="Card image cap"> 
@@ -11,7 +11,6 @@
           <div class="card-body">
             <h5 class="card-title"><%= f.name %></h5>
             <p class="card-text">price:<%= f.price %>/-</p>
-            <%#debugger%>
             <a href="View_product"><%= link_to "viewproduct",category_product_path(f.category_id,f.id)%></a>
           </div>
           </div>
