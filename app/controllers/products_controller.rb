@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
       redirect_to root_path, alert:'there is no product you want'
     else
       @prod = params[:search]
-      @products = Product.search("#{@prod}", page: params[:page], per_page: 20)
+      @products = Product.search("%#{@prod}%", page: params[:page], per_page: 20)
       if @products.blank?
         redirect_to root_path, alert:'there is no product you want'
       end
@@ -18,8 +18,9 @@ class ProductsController < ApplicationController
   end
 
   def new
+    #debugger
     @category = Category.find(params[:category_id])
-    @product = @category.products.new
+    @product = Product.new
   end
 
   def show
@@ -28,7 +29,7 @@ class ProductsController < ApplicationController
 
 
   def create
-    debugger
+    #debugger
     @category = Category.find(params[:category_id])
     @product = @category.products.new(product_params)
     @category.products << @product
@@ -68,7 +69,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.permit(:name,:description,:price,:user_id,:category_id,:image,:search,:quantity)
+    params.require(:product).permit(:name,:description,:price,:user_id,:category_id,:image,:search,:quantity)
   end
 
 end

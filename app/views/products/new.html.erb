@@ -1,6 +1,6 @@
 <center>
   <h2> Add product </h2>
-  <%= form_with url: category_products_path(@category.id,user_id:Current.user.id) do |f| %>
+  <%= form_with model: @product, url: category_products_path(@category.id) do |f| %>
   <p>
     <%= f.label 'name:'%><br>
     <%= f.text_field :name, id: 'name' %>
@@ -25,5 +25,9 @@
     <%= f.label 'quantity:'%><br>
     <%= f.text_field :quantity, id: 'quantity' %>
   </p>
+   
+  <%= f.hidden_field :user_id , value: Current.user.id%> 
+  <%= f.hidden_field :category_id , value: @category.id%> 
+
   <%= f.submit 'Create Product' %>
   <%end%></center>
